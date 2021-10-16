@@ -1,0 +1,25 @@
+- name: add apt-key for spotify
+  apt_key:
+    url: https://download.spotify.com/debian/pubkey_0D811D58.gpg 
+    state: present
+  tags:
+    - gui
+    - spotify
+
+- name: add spotify repo list
+  apt_repository:
+    filename: spotify.list
+    repo: deb http://repository.spotify.com stable non-free
+    state: present
+  tags:
+    - gui
+    - spotify
+
+- name: install spotify
+  apt:
+    name: spotify-client
+    state: present
+  tags:
+    - gui
+    - spotify
+

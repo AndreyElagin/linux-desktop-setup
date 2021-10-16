@@ -1,0 +1,12 @@
+- name: create Apps directory 
+  file:
+    path: ~/Apps
+    state: directory
+    mode: '0755'
+  become: false
+  tags:
+    - ui
+
+- import_tasks: spotify.yaml
+- import_tasks: postman.yaml 
+
