@@ -1,0 +1,22 @@
+- import_tasks: i3-autodisplay.yaml
+
+- name: add i3-gaps repo 
+  apt_repository:
+    repo: ppa:regolith-linux/release 
+    state: present
+  tags:
+    - i3
+
+- name: install i3 and related packages
+  apt:
+    name:
+      - i3-gaps
+      - i3status
+      - i3lock
+      - i3blocks
+      - i3xrocks
+      - remontoire 
+    state: present
+  tags:
+    - i3
+

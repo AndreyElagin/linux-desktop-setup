@@ -1,0 +1,9 @@
+- name: install pavucontrol 
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - pavucontrol
+  notify: restart pulse as user
+  tags:
+    - sound
