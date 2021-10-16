@@ -1,0 +1,20 @@
+- name: install everyday utils
+  apt:
+    name:
+      - git
+      - curl
+      - wget
+      - htop
+      - vim
+      - jq
+      - zsh
+      - apache2-utils # mostly for ab
+      - ranger
+      - sshpass
+      - neovim
+    state: present
+  tags:
+    - terminal 
+
+- import_tasks: oh-my-zsh.yaml
+
