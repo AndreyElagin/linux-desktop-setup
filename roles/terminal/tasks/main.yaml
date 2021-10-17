@@ -5,17 +5,16 @@
       - curl
       - wget
       - htop
-      - vim
       - jq
       - zsh
       - apache2-utils # mostly for ab
       - ranger
       - sshpass
-      - neovim
     state: present
   become: true
   tags:
     - terminal 
 
 - import_tasks: oh-my-zsh.yaml
+- import_tasks: neovim.yaml
 

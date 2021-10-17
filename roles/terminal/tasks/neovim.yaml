@@ -1,0 +1,19 @@
+- name: download latest release of neovim 
+  get_url:
+    url: https://github.com/neovim/neovim/releases/latest/download/nvim.appimage 
+    dest: /usr/local/bin/vim
+  become: true
+  tags:
+    - terminal
+    - neovim
+
+- name: make neovim file executable 
+  file:
+    path: /usr/local/bin/vim
+    state: file 
+    mode: a+x
+  become: true
+  tags:
+    - terminal
+    - neovim
+

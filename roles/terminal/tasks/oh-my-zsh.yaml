@@ -1,7 +1,15 @@
+- name: check zsh is already setup 
+  stat:
+    path: /home/{{ ansible_user_id }}/.zshrc
+  register: zsh_installed
+  tags:
+    - terminal 
+
 - name: cloning oh-my-zsh
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh
     dest: ~/.oh-my-zsh
+  when: not zsh_installed
   tags:
     - terminal
 
@@ -9,6 +17,7 @@
   copy:
     src: ~/.oh-my-zsh/templates/zshrc.zsh-template
     dest: ~/.zshrc
+  when: not zsh_installed
   tags:
     - terminal
 
@@ -35,6 +44,7 @@
     path: ~/.zshrc
     regexp: "^ZSH_THEME*"
     line: 'ZSH_THEME="avit"'
+  when: not zsh_installed
   tags:
     - terminal
 
