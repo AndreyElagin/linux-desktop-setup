@@ -1,6 +1,6 @@
 - name: check postman is already installed
   stat:
-    path: ~/Apps/Postman
+    path: /home/{{ ansible_user_id }}/Apps/Postman/app/Postman
   register: postman_installed
   tags:
     - ui
