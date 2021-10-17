@@ -1,5 +1,5 @@
 - hosts: localhost
-  become: yes
+  become: no 
   roles:
     - role: i3 
     - role: terminal 

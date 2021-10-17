@@ -3,7 +3,6 @@
     src: https://dl.pstmn.io/download/latest/linux64 
     dest: ~/Apps
     remote_src: yes
-  become: false
   tags:
     - ui
     - postman

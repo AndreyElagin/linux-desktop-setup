@@ -6,6 +6,7 @@
     state: present
   notify:
     - restart pulse as user
+  become: true
   tags:
     - bluetooth
 
@@ -17,12 +18,13 @@
     line: "load-module module-bluetooth-policy auto_switch=2"
   notify:
     - restart pulse as user
+  become: true
   tags:
     - bluetooth      
 
 - name: do not auto power on the bluetooth device
   command: gsettings set org.blueman.plugins.powermanager auto-power-on false
-  become: yes
+  become: false 
   become_user: "{{ user.name }}"
   tags:
     - bluetooth
@@ -33,6 +35,7 @@
     enabled: no
     state: stopped
   when: bluetooth.disable == False
+  become: true
   tags:
     - bluetooth
 
@@ -42,6 +45,7 @@
     enabled: yes
     state: started
   when: bluetooth.disable == False
+  become: true
   tags:
     - bluetooth
 
@@ -51,6 +55,7 @@
     enabled: no
     state: stopped
   when: bluetooth.disable == True
+  become: true
   tags:
     - bluetooth
 
@@ -60,6 +65,7 @@
     enabled: yes
     state: started
   when: bluetooth.disable == True
+  become: true
   tags:
     - bluetooth
 

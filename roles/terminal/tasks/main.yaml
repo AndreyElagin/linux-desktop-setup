@@ -13,6 +13,7 @@
       - sshpass
       - neovim
     state: present
+  become: true
   tags:
     - terminal 
 

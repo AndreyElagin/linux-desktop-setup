@@ -4,6 +4,7 @@
   apt_repository:
     repo: ppa:regolith-linux/release 
     state: present
+  become: true
   tags:
     - i3
 
@@ -17,6 +18,7 @@
       - i3xrocks
       - remontoire 
     state: present
+  become: true
   tags:
     - i3
 

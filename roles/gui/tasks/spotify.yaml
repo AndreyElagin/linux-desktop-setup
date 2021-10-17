@@ -2,6 +2,7 @@
   apt_key:
     url: https://download.spotify.com/debian/pubkey_0D811D58.gpg 
     state: present
+  become: true
   tags:
     - gui
     - spotify
@@ -11,6 +12,7 @@
     filename: spotify.list
     repo: deb http://repository.spotify.com stable non-free
     state: present
+  become: true
   tags:
     - gui
     - spotify
@@ -19,6 +21,7 @@
   apt:
     name: spotify-client
     state: present
+  become: true
   tags:
     - gui
     - spotify

@@ -2,7 +2,6 @@
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh
     dest: ~/.oh-my-zsh
-  become: false
   tags:
     - terminal
 
@@ -10,7 +9,6 @@
   copy:
     src: ~/.oh-my-zsh/templates/zshrc.zsh-template
     dest: ~/.zshrc
-  become: false
   tags:
     - terminal
 
@@ -36,7 +34,6 @@
     path: ~/.zshrc
     regexp: "^ZSH_THEME*"
     line: 'ZSH_THEME="avit"'
-  become: false
   tags:
     - terminal
 
