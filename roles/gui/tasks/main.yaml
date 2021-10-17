@@ -9,4 +9,6 @@
 - import_tasks: spotify.yaml
 - import_tasks: postman.yaml 
 - import_tasks: toolbox.yaml 
+- import_tasks: telegram.yaml 
+- import_tasks: robo3t.yaml 
 
