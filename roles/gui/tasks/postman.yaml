@@ -1,10 +1,34 @@
+- name: check postman is already installed
+  stat:
+    path: ~/Apps/Postman
+  register: postman_installed
+  tags:
+    - ui
+    - postman
+
 - name: download and unzip postman
   unarchive:
     src: https://dl.pstmn.io/download/latest/linux64 
     dest: ~/Apps
     remote_src: yes
+  when: not postman_installed.stat.exists
   tags:
     - ui
     - postman
 
-
+- name: create desktop entry for postman
+  copy:
+    dest: ~/.local/share/applications/Postman.desktop
+    mode: +x
+    content: |
+      [Desktop Entry]
+      Encoding=UTF-8
+      Name=Postman
+      Exec=/home/{{ ansible_user_id }}/Apps/Postman/app/Postman %U
+      Icon=/home/{{ ansible_user_id }}//Apps/Postman/app/resources/app/assets/icon.png
+      Terminal=false
+      Type=Application
+      Categories=Development;
+  tags:
+    - ui
+    - postman
