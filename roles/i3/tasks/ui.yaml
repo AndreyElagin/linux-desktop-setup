@@ -1,0 +1,11 @@
+- name: install ui tools for i3
+  apt:
+    name:
+      - rofi 
+      - dunst
+      - polybar
+    state: present
+  become: true
+  tags:
+    - i3 
+

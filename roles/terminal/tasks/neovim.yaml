@@ -17,3 +17,12 @@
     - terminal
     - neovim
 
+- name: install The Silver Searcher for full text search
+  apt:
+    name: silversearcher-ag
+    state: present
+  become: true
+  tags:
+    - terminal
+    - neovim
+
