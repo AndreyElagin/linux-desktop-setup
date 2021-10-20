@@ -4,6 +4,7 @@
     - role: i3 
     - role: terminal 
     - role: gui 
+    - role: dotfiles 
     - role: comcast.sdkman
       sdkman_user: "{{ ansible_user_id }}"
       sdkman_auto_answer: true

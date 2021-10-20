@@ -1,6 +1,5 @@
 - import_tasks: i3-autodisplay.yaml
 - import_tasks: ui.yaml
-- import_tasks: 1password-cli.yaml
 
 - name: add i3-gaps repo 
   apt_repository:
