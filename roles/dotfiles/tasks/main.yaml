@@ -18,9 +18,9 @@
 
 - name: login to 1password-cli
   expect:
-    command: op signin my.1password.com 1@gmail.com code 
+    command: "op signin my.1password.com {{ one_password_email }} {{ one_password_code }}" 
     responses:
-      Enter(.*): "pass"
+      Enter(.*): "{{ one_password_pass }}"
   no_log: false 
   register: op_login
   tags:

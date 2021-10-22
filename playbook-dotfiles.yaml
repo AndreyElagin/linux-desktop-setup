@@ -1,0 +1,15 @@
+- hosts: localhost
+  become: no
+  vars_prompt:
+    - name: one_password_email
+      prompt: Enter 1password email
+      private: no
+    - name: one_password_pass
+      prompt: Enter 1password master password
+      private: yes
+    - name: one_password_code
+      prompt: Enter 1password secret key
+      private: yes
+  roles:
+    - role: dotfiles 
+
