@@ -8,20 +8,25 @@
 
 - name: download chezmoi binary
   shell: sh -c "$(curl -fsLS git.io/chezmoi)"
+  when: not chezmoi_installed.stat.exists
   tags:
     - dotfiles
     - chezmoi
 
-
-- name: download and unzip 1password-cli 
-  unarchive:
-    src: "https://cache.agilebits.com/dist/1P/op/pkg/{{ one_password_version }}/op_linux_amd64_{{ one_password_version }}.zip"
-    dest: /usr/local/bin
-    include: op
-    remote_src: yes
+- name: move chezmoi to path
+  copy:
+    src: bin/chezmoi
+    dest: /usr/local/bin/chezmoi
   become: true
-  when: not op_installed.stat.exists
+  when: not chezmoi_installed.stat.exists
   tags:
-    - dotfiles 
+    - dotfiles
+    - chezmoi
 
-
+- name: sync dotfiles from repo
+  command: "chezmoi init --apply {{ github_username }}" 
+  environment:
+    OP_SESSION_my: "{{ op_login.stdout | regex_search('\"(.+)\"', '\\1') | first }}"
+  tags:
+    - dotfiles
+    - chezmoi

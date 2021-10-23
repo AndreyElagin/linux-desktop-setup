@@ -26,8 +26,5 @@
   tags:
     - dotfiles
 
-- name: debug
-  debug:
-    msg: "{{ op_login.stdout | regex_search('\"(.+)\"', '\\1') | first }}"
-  tags:
-    - dotfiles
+- import_tasks: chezmoi.yaml
+
