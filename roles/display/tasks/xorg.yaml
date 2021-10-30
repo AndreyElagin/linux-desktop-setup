@@ -1,4 +1,5 @@
 - name: install Xorg
+  become: true
   dnf:
     name:
       - xorg-x11-server-Xorg
