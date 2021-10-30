@@ -12,6 +12,7 @@
     - nvidia
 
 - name: Enable Copr repo t0xic0der/nvidia-auto-installer-for-fedora
+  become: true
   community.general.copr:
     host: copr.fedorainfracloud.org
     state: enabled
