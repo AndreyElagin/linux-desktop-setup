@@ -5,7 +5,7 @@
       - dnf-plugins-core
     state: present
   when:
-    - ansible_facts[‘distribution’] == "Fedora"
+    - ansible_distribution == "Fedora"
     - display.driver == "nvidia"
   tags:
     - display
@@ -17,7 +17,7 @@
     state: enabled
     name: t0xic0der/nvidia-auto-installer-for-fedora
   when:
-    - ansible_facts[‘distribution’] == "Fedora"
+    - ansible_distribution == "Fedora"
     - display.driver == "nvidia"
   tags:
     - display
@@ -30,7 +30,7 @@
       - nvautoinstall
     state: present
   when:
-    - ansible_facts[‘distribution’] == "Fedora"
+    - ansible_distribution == "Fedora"
     - display.driver == "nvidia"
   tags:
     - display
@@ -44,7 +44,7 @@
       - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
     state: present
   when:
-    - ansible_facts[‘distribution’] == "Fedora"
+    - ansible_distribution == "Fedora"
     - display.driver == "nvidia"
   tags:
     - display
@@ -54,7 +54,7 @@
   become: true
   command: "nvautoinstall --driver"
   when:
-    - ansible_facts[‘distribution’] == "Fedora"
+    - ansible_distribution == "Fedora"
     - display.driver == "nvidia"
   tags:
     - display
