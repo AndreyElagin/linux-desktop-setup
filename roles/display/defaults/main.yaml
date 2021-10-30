@@ -1,4 +1,4 @@
 display:
   lightdm:
     target_dpi: 192
-  driver: intel
+  driver: nvidia

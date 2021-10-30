@@ -37,26 +37,26 @@
     - display
     - nvidia
 
-- name: Enable the RPM Fusion repository
-  become: true
-  dnf:
-    name:
-      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
-      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
-    state: present
-  when:
-    - ansible_distribution == "Fedora"
-    - display.driver == "nvidia"
-  tags:
-    - display
-    - nvidia
+#- name: Enable the RPM Fusion repository
+#  become: true
+#  dnf:
+#    name:
+#      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+#      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+#    state: present
+#  when:
+#    - ansible_distribution == "Fedora"
+#    - display.driver == "nvidia"
+#  tags:
+#    - display
+#    - nvidia
 
-- name: Install NVIDIA drivers
-  become: true
-  command: "nvautoinstall --driver"
-  when:
-    - ansible_distribution == "Fedora"
-    - display.driver == "nvidia"
-  tags:
-    - display
-    - nvidia
+#- name: Install NVIDIA drivers
+#  become: true
+#  command: "nvautoinstall --driver"
+#  when:
+#    - ansible_distribution == "Fedora"
+#    - display.driver == "nvidia"
+#  tags:
+#    - display
+#    - nvidia
