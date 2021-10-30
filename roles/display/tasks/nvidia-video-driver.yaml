@@ -1,0 +1,61 @@
+- name: Install dnf-plugins-core
+  become: true
+  dnf:
+    name:
+      - dnf-plugins-core
+    state: present
+  when:
+    - ansible_facts[‘distribution’] == "Fedora"
+    - display.driver == "nvidia"
+  tags:
+    - display
+    - nvidia
+
+- name: Enable Copr repo t0xic0der/nvidia-auto-installer-for-fedora
+  community.general.copr:
+    host: copr.fedorainfracloud.org
+    state: enabled
+    name: t0xic0der/nvidia-auto-installer-for-fedora
+  when:
+    - ansible_facts[‘distribution’] == "Fedora"
+    - display.driver == "nvidia"
+  tags:
+    - display
+    - nvidia
+
+- name: Install autoinstaller for NVIDIA drivers
+  become: true
+  dnf:
+    name:
+      - nvautoinstall
+    state: present
+  when:
+    - ansible_facts[‘distribution’] == "Fedora"
+    - display.driver == "nvidia"
+  tags:
+    - display
+    - nvidia
+
+- name: Enable the RPM Fusion repository
+  become: true
+  dnf:
+    name:
+      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
+      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+    state: present
+  when:
+    - ansible_facts[‘distribution’] == "Fedora"
+    - display.driver == "nvidia"
+  tags:
+    - display
+    - nvidia
+
+- name: Install NVIDIA drivers
+  become: true
+  command: "nvautoinstall --driver"
+  when:
+    - ansible_facts[‘distribution’] == "Fedora"
+    - display.driver == "nvidia"
+  tags:
+    - display
+    - nvidia

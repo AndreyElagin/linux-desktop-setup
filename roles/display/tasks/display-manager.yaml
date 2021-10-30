@@ -1,0 +1,103 @@
+- name: Install LightDM
+  become: true
+  dnf:
+    name:
+      - lightdm
+      - lightdm-gtk-greeter
+    state: present
+  when: ansible_facts[‘distribution’] == "Fedora"
+  tags:
+    - display
+    - display-manager
+    - lightdm
+
+- name: Install LightDM
+  become: true
+  apt:
+    name:
+      - lightdm
+      - lightdm-gtk-greeter
+    state: present
+  when: ansible_facts[‘distribution’] == "Ubuntu"
+  tags:
+    - display
+    - display-manager
+    - lightdm
+
+- name: Enable LightDM
+  become: true
+  service:
+    name: lightdm.service
+    enabled: yes
+  tags:
+    - display
+    - display-manager
+    - lightdm
+
+- name: Create background dir
+  become: true
+  file:
+    path: /usr/share/backgrounds
+    state: directory
+  tags:
+    - display
+    - display-manager
+    - lightdm
+
+- name: Add LightDM greeter background image
+  become: true
+  copy:
+    src: bg.png
+    dest: /usr/share/backgrounds/bg.png
+  tags:
+    - display
+    - display-manager
+    - lightdm
+
+- name: Set LightDM greeter background
+  become: true
+  lineinfile:
+    dest: /etc/lightdm/lightdm-gtk-greeter.conf
+    regexp: "^background="
+    state: present
+    line: "background=/usr/share/backgrounds/bg.png"
+  tags:
+    - display
+    - display-manager
+    - lightdm
+
+- name: Hide user images
+  become: true
+  lineinfile:
+    dest: /etc/lightdm/lightdm-gtk-greeter.conf
+    regexp: "^hide-user-image="
+    state: present
+    line: "hide-user-image=true"
+  tags:
+    - display
+    - display-manager
+    - lightdm
+
+- name: Set LightDM greeter theme
+  become: true
+  lineinfile:
+    dest: /usr/share/xgreeters/lightdm-gtk-greeter.desktop
+    regexp: "^Exec="
+    state: present
+    line: "Exec=env GTK_THEME=Adwaita:dark lightdm-gtk-greeter"
+  tags:
+    - display
+    - display-manager
+    - lightdm
+
+- name: Set dpi for LightDM
+  become: true
+  lineinfile:
+    dest: /etc/lightdm/lightdm-gtk-greeter.conf
+    regexp: "^xft-dpi="
+    state: present
+    line: "xft-dpi={{ display.lightdm.target_dpi }}"
+  tags:
+    - display
+    - display-manager
+    - lightdm

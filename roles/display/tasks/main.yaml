@@ -1,0 +1,3 @@
+- import_tasks: xorg.yaml
+- import_tasks: display-manager.yaml
+- import_tasks: nvidia-video-driver.yaml

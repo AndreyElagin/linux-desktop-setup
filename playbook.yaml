@@ -1,6 +1,7 @@
 - hosts: localhost
   become: no
   roles:
+    - role: display 
     - role: i3 
     - role: terminal 
     - role: gui 

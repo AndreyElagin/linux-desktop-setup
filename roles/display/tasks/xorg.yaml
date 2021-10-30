@@ -1,0 +1,8 @@
+- name: install Xorg
+  dnf:
+    name:
+      - xorg-x11-server-Xorg
+    state: present
+  tags:
+    - display
+    - xorg
