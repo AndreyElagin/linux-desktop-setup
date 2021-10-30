@@ -1,2 +1,5 @@
-- src: comcast.sdkman
-- src: community.general
+roles:
+  - name: comcast.sdkman
+
+collections:
+  - name: community.general.copr
