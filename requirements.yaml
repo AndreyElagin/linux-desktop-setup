@@ -2,4 +2,4 @@ roles:
   - name: comcast.sdkman
 
 collections:
-  - name: community.general.copr
+  - name: community.general
