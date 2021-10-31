@@ -1,12 +1,22 @@
-- name: install musl-dev (required dependency)
-  apt:
-   name: musl-dev
-   state: present
+- name: [Ubuntu] Install musl-dev (required dependency)
   become: true
+  apt:
+    name: musl-dev
+    state: present
+  when: ansible_distribution == "Ubuntu"
   tags:
     - i3
 
-- name: get latest release URL of autodisplay from github  
+- name: [Fedora] Install musl-dev (required dependency)
+  become: true
+  dnf:
+    name: musl-devel
+    state: present
+  when: ansible_distribution == "Fedora"
+  tags:
+    - i3
+
+- name: Get latest release URL of autodisplay from github  
   uri:
     url: https://api.github.com/repos/lpicanco/i3-autodisplay/releases/latest
     return_content: true
@@ -14,20 +24,19 @@
   tags:
     - i3
 
-- name: download latest release of autodisplay 
+- name: Download latest release of autodisplay
+  become: true
   get_url:
     url: "{{ release.json.assets[0].browser_download_url }}"
     dest: /usr/local/bin/autodisplay
-  become: true
   tags:
     - i3
 
-- name: make autodisplay file executable 
+- name: Make autodisplay file executable
+  become: true
   file:
     path: /usr/local/bin/autodisplay
     state: file 
     mode: a+x
-  become: true
   tags:
     - i3
-  
