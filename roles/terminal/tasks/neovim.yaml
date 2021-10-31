@@ -32,7 +32,9 @@
 - name: (Fedora) Install neovim + the_silver_searcher
   become: true
   dnf:
-    name: the_silver_searcher
+    name:
+      - neovim
+      - the_silver_searcher
     state: present
   when: ansible_distribution == "Fedora"
   tags:
