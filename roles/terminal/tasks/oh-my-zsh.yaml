@@ -1,31 +1,31 @@
-- name: check zsh is already setup
+- name: Check zsh is already installed
   stat:
     path: /home/{{ ansible_user_id }}/.zshrc
   register: zsh_installed
   tags:
     - terminal
 
-- name: cloning oh-my-zsh
+- name: Clone oh-my-zsh
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh
-    dest: ~/.oh-my-zsh
-  when: not zsh_installed
+    dest: /home/{{ ansible_user_id }}/.oh-my-zsh
+  when: not zsh_installed.stat.exists
   tags:
     - terminal
 
-- name: creating new ~/.zshrc
+- name: Create new ~/.zshrc
   copy:
-    src: ~/.oh-my-zsh/templates/zshrc.zsh-template
-    dest: ~/.zshrc
-  when: not zsh_installed
+    src: /home/{{ ansible_user_id }}/.oh-my-zsh/templates/zshrc.zsh-template
+    dest: /home/{{ ansible_user_id }}/.zshrc
+  when: not zsh_installed.stat.exists
   tags:
     - terminal
 
-- name: set default shell for user
+- name: Set default shell for user
+  become: true
   user:
     name: "{{ ansible_user_id }}"
     shell: /bin/zsh
-  become: true
   tags:
     - terminal
 
@@ -40,11 +40,11 @@
   tags:
     - terminal
 
-- name: set theme for zsh
+- name: Set theme for zsh
   lineinfile:
-    path: ~/.zshrc
+    path: /home/{{ ansible_user_id }}/.zshrc
     regexp: "^ZSH_THEME*"
     line: 'ZSH_THEME="avit"'
-  when: not zsh_installed
+  when: not zsh_installed.stat.exists
   tags:
     - terminal
