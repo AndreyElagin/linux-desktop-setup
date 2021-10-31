@@ -25,7 +25,7 @@
       Encoding=UTF-8
       Name=Postman
       Exec=/home/{{ ansible_user_id }}/Apps/Postman/app/Postman %U
-      Icon=/home/{{ ansible_user_id }}//Apps/Postman/app/resources/app/assets/icon.png
+      Icon=/home/{{ ansible_user_id }}/Apps/Postman/app/resources/app/assets/icon.png
       Terminal=false
       Type=Application
       Categories=Development;

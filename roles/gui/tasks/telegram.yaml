@@ -26,7 +26,7 @@
       Version=1.0
       Type=Application
       NoDisplay=true
-      Exec=/home/{{ ansible_user_id }}//Apps/Telegram/Telegram -workdir /home/daddyingrave/.local/share/TelegramDesktop/ -- %u
+      Exec=/home/{{ ansible_user_id }}/Apps/Telegram/Telegram -workdir /home/daddyingrave/.local/share/TelegramDesktop/ -- %u
       Name=Telegram Desktop
       Comment=Custom definition for Telegram Desktop
   tags:

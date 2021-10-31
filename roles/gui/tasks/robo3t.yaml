@@ -45,7 +45,7 @@
       Encoding=UTF-8
       Version=1.0
       Type=Application
-      Exec=/home/{{ ansible_user_id }}//Apps/Robo3t/bin/robo3t %U 
+      Exec=/home/{{ ansible_user_id }}/Apps/Robo3t/bin/robo3t %U 
       Name=Robo3t
   tags:
     - gui

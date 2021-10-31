@@ -1,12 +1,12 @@
-- name: Check toolbox is already installed
+- name: Check Toolbox is already installed
   stat:
     path: /home/{{ ansible_user_id }}/Apps/Toolbox/jetbrains-toolbox
   register: toolbox_installed
   tags:
     - gui
-    - toolbox 
+    - toolbox
 
-- name: Create directory for toolbox
+- name: Create directory for Toolbox
   file:
     path: /home/{{ ansible_user_id }}/Apps/Toolbox
     state: directory
@@ -14,9 +14,9 @@
     - gui
     - toolbox
 
-- name: Get latest release URL of toolbox app 
+- name: Get latest release URL of Toolbox app
   uri:
-    url: https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release 
+    url: https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release
     return_content: true
   register: release
   when: not toolbox_installed.stat.exists
@@ -24,38 +24,20 @@
     - gui
     - toolbox
 
-- name: Download and unzip toolbox 
+- name: Download and unzip Toolbox
   unarchive:
-    src: "{{ release.json.TBA[0].downloads.linux.link }}" 
+    src: "{{ release.json.TBA[0].downloads.linux.link }}"
     dest: /home/{{ ansible_user_id }}/Apps/Toolbox
     remote_src: yes
-    extra_opts: 
+    extra_opts:
       - --strip-components=1
-  when: not toolbox_installed.stat.exists 
+  when: not toolbox_installed.stat.exists
   tags:
     - gui
-    - toolbox 
+    - toolbox
 
-- name: Create desktop enry for toolbox
-  copy:
-    dest: /home/{{ ansible_user_id }}/.local/share/applications/Toolbox.desktop
-    mode: +x
-    content: |
-      [Desktop Entry]
-      Icon=/home/{{ ansible_user_id }}/.local/share/JetBrains/Toolbox/toolbox.svg
-      Exec=/home/{{ ansible_user_id }}/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox %u
-      Version=1.0
-      Type=Application
-      Categories=Development
-      Name=JetBrains Toolbox
-      StartupWMClass=jetbrains-toolbox
-      Terminal=false
-      MimeType=x-scheme-handler/jetbrains;
-      X-GNOME-Autostart-enabled=true
-      StartupNotify=false
-      X-GNOME-Autostart-Delay=10
-      X-MATE-Autostart-Delay=10
-      X-KDE-autostart-after=panel
+- name: Create desktop entry and binary for Toolbox
+  shell: "(/home/{{ ansible_user_id }}/Apps/Toolbox/jetbrains-toolbox >/dev/null 2>&1 &)"
   tags:
     - gui
     - toolbox
