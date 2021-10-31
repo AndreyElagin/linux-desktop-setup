@@ -20,7 +20,7 @@
     - gui
     - spotify
 
-- name (Fedora) Install Spotify
+- name: (Fedora) Install Spotify
   community.general.flatpak:
     name: com.spotify.Client
     state: present
