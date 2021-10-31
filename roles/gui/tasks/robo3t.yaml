@@ -37,6 +37,7 @@
     - robo3t
 
 - name: Link libcurl
+  become: true
   file:
     src: /usr/lib64/libcurl.so.4
     dest: /home/{{ ansible_user_id }}/Apps/Robo3t/lib/libcurl-gnutls.so.4
