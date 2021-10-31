@@ -7,6 +7,9 @@
       - dbus-x11
       - openssl
       - nss
+      - mesa-dri-drivers
+      - glx-utils
+      - libglvnd
     state: present
   when:
     - ansible_distribution == "Fedora"
