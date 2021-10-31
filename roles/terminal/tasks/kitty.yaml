@@ -16,15 +16,38 @@
     - terminal
     - kitty
 
-- name: debug
-  debug:
-    msg: "{{ kitty_source_code }}"
+- name: Install kitty
+  shell: "{{ kitty_source_code.content }}"
+  when: not kitty_installed.stat.exists
   tags:
     - terminal
     - kitty
 
-- name: Install kitty
-  shell: "{{ kitty_source_code }}"
+- name: Link kitty
+  file:
+    src: /home/{{ ansible_user_id }}/.local/kitty.app/bin/kitty
+    dest: /home/{{ ansible_user_id }}/.local/bin/kitty
+    state: link
+  when: not kitty_installed.stat.exists
+  tags:
+    - terminal
+    - kitty
+
+- name: Copy kitty desktop to .local/share/applications
+  copy:
+    src: /home/{{ ansible_user_id }}/.local/kitty.app/share/applications/kitty.desktop
+    dest: /home/{{ ansible_user_id }}/.local/share/applications/kitty.desktop
+  when: not kitty_installed.stat.exists
+  tags:
+    - terminal
+    - kitty
+
+- name: Update kitty icon link in desktop file
+  lineinfile:
+    dest: /home/{{ ansible_user_id }}/.local/share/applications/kitty.desktop
+    regexp: "^Icon="
+    state: present
+    line: "Icon=/home/{{ ansible_user_id }}/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png"
   when: not kitty_installed.stat.exists
   tags:
     - terminal

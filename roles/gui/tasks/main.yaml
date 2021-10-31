@@ -6,17 +6,8 @@
   tags:
     - gui
 
-- name: Create Apps directory
-  file:
-    path: /home/{{ ansible_user_id }}/.local/share/applications
-    state: directory
-    mode: '0755'
-  tags:
-    - gui
-
 - import_tasks: spotify.yaml
 - import_tasks: postman.yaml 
 - import_tasks: toolbox.yaml 
 - import_tasks: telegram.yaml 
 - import_tasks: robo3t.yaml 
-
