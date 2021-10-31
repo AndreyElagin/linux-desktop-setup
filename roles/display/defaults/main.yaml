@@ -2,3 +2,4 @@ display:
   lightdm:
     target_dpi: 192
   driver: nvidia
+  vm_installation: true
