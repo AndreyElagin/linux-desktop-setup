@@ -1,14 +1,3 @@
-- name: (Fedora) Install lpf-spotify-client
-  become: true
-  dnf:
-    name:
-      - lpf-spotify-client
-    state: present
-  when: ansible_distribution == "Fedora"
-  tags:
-    - gui
-    - spotify
-
 - name: (Fedora) Add flatpak Spotify repo
   flatpak_remote:
     name: flathub
