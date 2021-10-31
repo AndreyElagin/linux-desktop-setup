@@ -1,4 +1,4 @@
-- name: check toolbox is already installed
+- name: Check toolbox is already installed
   stat:
     path: /home/{{ ansible_user_id }}/Apps/Toolbox/jetbrains-toolbox
   register: toolbox_installed
@@ -6,7 +6,7 @@
     - ui
     - toolbox 
 
-- name: create directory for toolbox
+- name: Create directory for toolbox
   file:
     path: /home/{{ ansible_user_id }}/Apps/Toolbox
     state: directory
@@ -14,7 +14,7 @@
     - ui
     - toolbox
 
-- name: get latest release URL of toolbox app 
+- name: Get latest release URL of toolbox app 
   uri:
     url: https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release 
     return_content: true
@@ -24,7 +24,7 @@
     - ui
     - toolbox
 
-- name: download and unzip toolbox 
+- name: Download and unzip toolbox 
   unarchive:
     src: "{{ release.json.TBA[0].downloads.linux.link }}" 
     dest: /home/{{ ansible_user_id }}/Apps/Toolbox
@@ -36,9 +36,9 @@
     - ui
     - toolbox 
 
-- name: create desktop enry for toolbox
+- name: Create desktop enry for toolbox
   copy:
-    dest: ~/.local/share/applications/Toolbox.desktop
+    dest: /home/{{ ansible_user_id }}/.local/share/applications/Toolbox.desktop
     mode: +x
     content: |
       [Desktop Entry]
@@ -59,4 +59,3 @@
   tags:
     - ui
     - toolbox
-

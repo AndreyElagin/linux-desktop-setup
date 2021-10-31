@@ -1,4 +1,4 @@
-- name: check postman is already installed
+- name: Check postman is already installed
   stat:
     path: /home/{{ ansible_user_id }}/Apps/Postman/app/Postman
   register: postman_installed
@@ -6,19 +6,19 @@
     - ui
     - postman
 
-- name: download and unzip postman
+- name: Download and unzip postman
   unarchive:
     src: https://dl.pstmn.io/download/latest/linux64 
-    dest: ~/Apps
+    dest: /home/{{ ansible_user_id }}/Apps
     remote_src: yes
   when: not postman_installed.stat.exists
   tags:
     - ui
     - postman
 
-- name: create desktop entry for postman
+- name: Create desktop entry for postman
   copy:
-    dest: ~/.local/share/applications/Postman.desktop
+    dest: /home/{{ ansible_user_id }}/.local/share/applications/Postman.desktop
     mode: +x
     content: |
       [Desktop Entry]

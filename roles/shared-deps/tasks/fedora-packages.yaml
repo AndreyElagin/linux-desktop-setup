@@ -1,0 +1,10 @@
+- name: (Fedora) Install shared dependencies
+  become: true
+  dnf:
+    name:
+      - lpf
+    state: present
+  when:
+    - ansible_distribution == "Fedora"
+  tags:
+    - shared_deps

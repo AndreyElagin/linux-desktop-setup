@@ -1,4 +1,4 @@
-- name: check telegram is already installed
+- name: Check telegram is already installed
   stat:
     path: /home/{{ ansible_user_id }}/Apps/Telegram/Telegram
   register: telegram_installed
@@ -6,7 +6,7 @@
     - ui
     - telegram 
 
-- name: download and unzip telegram 
+- name: Download and unzip telegram 
   unarchive:
     src: https://telegram.org/dl/desktop/linux
     dest: /home/{{ ansible_user_id }}/Apps
@@ -16,9 +16,9 @@
     - ui
     - telegram 
 
-- name: create desktop entry for telegram 
+- name: Create desktop entry for telegram 
   copy:
-    dest: ~/.local/share/applications/Telegram.desktop
+    dest: /home/{{ ansible_user_id }}/.local/share/applications/Telegram.desktop
     mode: +x
     content: |
       [Desktop Entry]

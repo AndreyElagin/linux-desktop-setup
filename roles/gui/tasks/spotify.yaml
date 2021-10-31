@@ -1,28 +1,65 @@
-- name: add apt-key for spotify
-  apt_key:
-    url: https://download.spotify.com/debian/pubkey_0D811D58.gpg 
-    state: present
+- name: (Fedora) Install lpf-spotify-client
   become: true
+  dnf:
+    name:
+      - lpf-spotify-client
+    state: present
+  when: ansible_distribution == "Fedora"
   tags:
     - gui
     - spotify
 
-- name: add spotify repo list
+- name: (Fedora) Approve Spotify LPF module
+  become: true
+  command: sh -c 'echo y | env PAGER=/bin/cat lpf approve spotify-client'
+  when: ansible_distribution == "Fedora"
+  tags:
+    - gui
+    - spotify
+
+- name: (Fedora) Build Spotify LPF module
+  become: true
+  command: sh -c 'echo y | lpf build spotify-client'
+  when: ansible_distribution == "Fedora"
+  tags:
+    - gui
+    - spotify
+
+- name: (Fedora) Install the Spotify LPF module
+  become: true
+  command: sh -c 'echo y | lpf install spotify-client'
+  when: ansible_distribution == "Fedora"
+  tags:
+    - gui
+    - spotify
+
+- name: (Ubuntu) Add apt-key for spotify
+  become: true
+  apt_key:
+    url: https://download.spotify.com/debian/pubkey_0D811D58.gpg
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - gui
+    - spotify
+
+- name: (Ubuntu) Add spotify repo list
+  become: true
   apt_repository:
     filename: spotify.list
     repo: deb http://repository.spotify.com stable non-free
     state: present
-  become: true
+  when: ansible_distribution == "Ubuntu"
   tags:
     - gui
     - spotify
 
-- name: install spotify
+- name: (Ubuntu) Install spotify
+  become: true
   apt:
     name: spotify-client
     state: present
-  become: true
+  when: ansible_distribution == "Ubuntu"
   tags:
     - gui
     - spotify
-

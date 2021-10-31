@@ -1,6 +1,14 @@
-- name: create Apps directory 
+- name: Create Apps directory 
   file:
-    path: ~/Apps
+    path: /home/{{ ansible_user_id }}/Apps
+    state: directory
+    mode: '0755'
+  tags:
+    - ui
+
+- name: Create Apps directory
+  file:
+    path: /home/{{ ansible_user_id }}/.local/share/applications
     state: directory
     mode: '0755'
   tags:

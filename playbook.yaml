@@ -1,6 +1,7 @@
 - hosts: localhost
   become: no
   roles:
+    - role: shared-deps
     - role: display 
     - role: i3 
     - role: terminal 
@@ -15,4 +16,3 @@
       sdkman_defaults:
         java: 11.0.12.fx-librca 
         sbt: 1.5.5
-

@@ -1,4 +1,4 @@
-- name: check robo3t is already installed
+- name: Check robo3t is already installed
   stat:
     path: /home/{{ ansible_user_id }}/Apps/Robo3t
   register: robo3t_installed
@@ -6,7 +6,7 @@
     - ui
     - robo3t 
 
-- name: create directory for robo3t 
+- name: Create directory for robo3t 
   file:
     path: /home/{{ ansible_user_id }}/Apps/Robo3t
     state: directory
@@ -14,7 +14,7 @@
     - ui
     - robo3t 
 
-- name: get latest release URL of robo3t from github  
+- name: Get latest release URL of robo3t from github  
   uri:
     url: https://api.github.com/repos/Studio3T/robomongo/releases/latest
     return_content: true
@@ -24,7 +24,7 @@
     - gui
     - robo3t
 
-- name: download and unzip robo3t 
+- name: Download and unzip robo3t 
   unarchive:
     src: "{{ release.json.assets[1].browser_download_url }}"
     dest: /home/{{ ansible_user_id }}/Apps/Robo3t
@@ -36,7 +36,7 @@
     - ui
     - robo3t 
 
-- name: create desktop entry for robo3t 
+- name: Create desktop entry for robo3t 
   copy:
     dest: /home/{{ ansible_user_id }}/.local/share/applications/Robo3t.desktop
     mode: +x
