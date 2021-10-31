@@ -20,3 +20,4 @@
 
 - import_tasks: oh-my-zsh.yaml
 - import_tasks: neovim.yaml
+- import_tasks: kitty.yaml
