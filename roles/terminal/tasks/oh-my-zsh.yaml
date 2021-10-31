@@ -1,9 +1,9 @@
-- name: check zsh is already setup 
+- name: check zsh is already setup
   stat:
     path: /home/{{ ansible_user_id }}/.zshrc
   register: zsh_installed
   tags:
-    - terminal 
+    - terminal
 
 - name: cloning oh-my-zsh
   git:
@@ -30,14 +30,15 @@
     - terminal
 
 # https://askubuntu.com/questions/910821/programs-installed-via-snap-not-showing-up-in-launcher
-- name: export all directories (for snap)
+- name: (Ubuntu) export all directories (for snap)
   become: yes
   lineinfile:
     path: /etc/zsh/zprofile
     regexp: "^emulate*"
     line: "emulate sh -c 'source /etc/profile'"
+  when: ansible_distribution == "Ubuntu"
   tags:
-    - terminal 
+    - terminal
 
 - name: set theme for zsh
   lineinfile:
@@ -47,4 +48,3 @@
   when: not zsh_installed
   tags:
     - terminal
-

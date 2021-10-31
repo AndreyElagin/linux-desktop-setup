@@ -7,7 +7,7 @@
       - htop
       - jq
       - zsh
-      - apache2-utils # mostly for ab
+      - apache2-utils
       - ranger
       - sshpass
       - flameshot
@@ -18,4 +18,3 @@
 
 - import_tasks: oh-my-zsh.yaml
 - import_tasks: neovim.yaml
-
