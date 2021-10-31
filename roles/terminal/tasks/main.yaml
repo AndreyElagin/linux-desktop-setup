@@ -1,20 +1,22 @@
-- name: install everyday utils
-  apt:
-    name:
-      - git
-      - curl
-      - wget
-      - htop
-      - jq
-      - zsh
-      - apache2-utils
-      - ranger
-      - sshpass
-      - flameshot
-    state: present
+- name: (Ubuntu) Install everyday utils
   become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ terminal.shared_packages + terminal.ubuntu_packages }}"
+  when: ansible_distribution == "Ubuntu"
   tags:
-    - terminal 
+    - terminal
+
+- name: (Fedora) Install everyday utils
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ terminal.shared_packages + terminal.fedora_packages }}"
+  when: ansible_distribution == "Fedora"
+  tags:
+    - terminal
 
 - import_tasks: oh-my-zsh.yaml
 - import_tasks: neovim.yaml

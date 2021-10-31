@@ -1,0 +1,18 @@
+terminal:
+  shared_packages:
+    - git
+    - curl
+    - wget
+    - htop
+    - jq
+    - zsh
+    - ranger
+    - sshpass
+    - flameshot
+    - fzf
+    - tree
+    - nodejs
+  fedora_packages:
+    - httpd-tools
+  ubuntu_packages:
+    - apache2-utils

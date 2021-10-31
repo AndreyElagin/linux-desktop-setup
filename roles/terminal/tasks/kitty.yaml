@@ -1,0 +1,24 @@
+- name: Check kitty is already installed
+  stat:
+    path: /home/{{ ansible_user_id }}/.local/kitty.app
+  register: kitty_installed
+  tags:
+    - terminal
+    - kitty
+
+- name: Fetch kitty installer code
+  uri:
+    url: https://sw.kovidgoyal.net/kitty/installer.sh
+    return_content: true
+  register: kitty_source_code
+  when: not kitty_installed.stat.exists
+  tags:
+    - terminal
+    - kitty
+
+- name: Install kitty
+  shell: "{{ kitty_source_code }}"
+  when: not kitty_installed.stat.exists
+  tags:
+    - terminal
+    - kitty
