@@ -9,11 +9,12 @@
     - neovim
 
 - name: (Ubuntu) Make neovim file executable
+  become: true
   file:
     path: /usr/local/bin/vim
     state: file
     mode: a+x
-  become: true
+  when: ansible_distribution == "Ubuntu"
   tags:
     - terminal
     - neovim

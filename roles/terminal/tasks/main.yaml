@@ -1,9 +1,8 @@
 - name: (Ubuntu) Install everyday utils
   become: true
   apt:
-    name: "{{ item }}"
+    name: "{{ terminal.shared_packages + terminal.ubuntu_packages }}"
     state: present
-  with_items: "{{ terminal.shared_packages + terminal.ubuntu_packages }}"
   when: ansible_distribution == "Ubuntu"
   tags:
     - terminal
@@ -11,9 +10,8 @@
 - name: (Fedora) Install everyday utils
   become: true
   dnf:
-    name: "{{ item }}"
+    name: "{{ terminal.shared_packages + terminal.fedora_packages }}"
     state: present
-  with_items: "{{ terminal.shared_packages + terminal.fedora_packages }}"
   when: ansible_distribution == "Fedora"
   tags:
     - terminal
