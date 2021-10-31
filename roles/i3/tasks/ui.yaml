@@ -12,7 +12,7 @@
 
 - name: "[Fedora] Install ui tools for i3"
   become: true
-  apt:
+  dnf:
     name:
     - rofi
     - dunst
