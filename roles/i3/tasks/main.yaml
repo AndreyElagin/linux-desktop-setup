@@ -1,4 +1,4 @@
-- name: [Fedora] Install picom
+- name: "[Fedora] Install picom"
   dnf:
     name:
       - picom
@@ -8,7 +8,7 @@
   tags:
     - i3
 
-- name: [Ubuntu] add i3-gaps repo
+- name: "[Ubuntu] add i3-gaps repo"
   become: true
   apt_repository:
     repo: ppa:regolith-linux/release 
@@ -17,7 +17,7 @@
   tags:
     - i3
 
-- name: [Ubuntu] Install i3 and related packages
+- name: "[Ubuntu] Install i3 and related packages"
   apt:
     name:
       - i3-gaps
@@ -31,7 +31,7 @@
   tags:
     - i3
 
-- name: [Fedora] Install i3 and related packages
+- name: "[Fedora] Install i3 and related packages"
   dnf:
     name:
       - i3-gaps

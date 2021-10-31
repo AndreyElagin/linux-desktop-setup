@@ -1,4 +1,4 @@
-- name: [Ubuntu] Install ui tools for i3
+- name: "[Ubuntu] Install ui tools for i3"
   become: true
   apt:
     name:
@@ -10,7 +10,7 @@
   tags:
     - i3 
 
-- name: [Fedora] Install ui tools for i3
+- name: "[Fedora] Install ui tools for i3"
   become: true
   apt:
     name:
