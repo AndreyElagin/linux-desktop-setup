@@ -3,7 +3,7 @@
     path: /home/{{ ansible_user_id }}/Apps/Postman/app/Postman
   register: postman_installed
   tags:
-    - ui
+    - gui
     - postman
 
 - name: Download and unzip postman
@@ -13,7 +13,7 @@
     remote_src: yes
   when: not postman_installed.stat.exists
   tags:
-    - ui
+    - gui
     - postman
 
 - name: Create desktop entry for postman
@@ -30,5 +30,5 @@
       Type=Application
       Categories=Development;
   tags:
-    - ui
+    - gui
     - postman

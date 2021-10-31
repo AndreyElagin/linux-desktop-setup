@@ -3,7 +3,7 @@
     path: /home/{{ ansible_user_id }}/Apps/Telegram/Telegram
   register: telegram_installed
   tags:
-    - ui
+    - gui
     - telegram 
 
 - name: Download and unzip telegram 
@@ -13,7 +13,7 @@
     remote_src: yes
   when: not telegram_installed.stat.exists
   tags:
-    - ui
+    - gui
     - telegram 
 
 - name: Create desktop entry for telegram 
@@ -30,5 +30,5 @@
       Name=Telegram Desktop
       Comment=Custom definition for Telegram Desktop
   tags:
-    - ui
+    - gui
     - telgram

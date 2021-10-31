@@ -3,7 +3,7 @@
     path: /home/{{ ansible_user_id }}/Apps/Robo3t
   register: robo3t_installed
   tags:
-    - ui
+    - gui
     - robo3t 
 
 - name: Create directory for robo3t 
@@ -11,7 +11,7 @@
     path: /home/{{ ansible_user_id }}/Apps/Robo3t
     state: directory
   tags:
-    - ui
+    - gui
     - robo3t 
 
 - name: Get latest release URL of robo3t from github  
@@ -33,7 +33,7 @@
       - --strip-components=1
   when: not robo3t_installed.stat.exists 
   tags:
-    - ui
+    - gui
     - robo3t 
 
 - name: Create desktop entry for robo3t 
@@ -48,5 +48,5 @@
       Exec=/home/{{ ansible_user_id }}//Apps/Robo3t/bin/robo3t %U 
       Name=Robo3t
   tags:
-    - ui
+    - gui
     - robo3t 

@@ -3,7 +3,7 @@
     path: /home/{{ ansible_user_id }}/Apps/Toolbox/jetbrains-toolbox
   register: toolbox_installed
   tags:
-    - ui
+    - gui
     - toolbox 
 
 - name: Create directory for toolbox
@@ -11,7 +11,7 @@
     path: /home/{{ ansible_user_id }}/Apps/Toolbox
     state: directory
   tags:
-    - ui
+    - gui
     - toolbox
 
 - name: Get latest release URL of toolbox app 
@@ -21,7 +21,7 @@
   register: release
   when: not toolbox_installed.stat.exists
   tags:
-    - ui
+    - gui
     - toolbox
 
 - name: Download and unzip toolbox 
@@ -33,7 +33,7 @@
       - --strip-components=1
   when: not toolbox_installed.stat.exists 
   tags:
-    - ui
+    - gui
     - toolbox 
 
 - name: Create desktop enry for toolbox
@@ -57,5 +57,5 @@
       X-MATE-Autostart-Delay=10
       X-KDE-autostart-after=panel
   tags:
-    - ui
+    - gui
     - toolbox
