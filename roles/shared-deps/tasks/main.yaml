@@ -1,2 +1,2 @@
-- import_tasks: fedora-packages.yaml
 - import_tasks: fedora-repos.yaml
+- import_tasks: fedora-packages.yaml
