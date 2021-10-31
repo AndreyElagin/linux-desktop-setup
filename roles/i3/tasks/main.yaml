@@ -18,16 +18,17 @@
     - i3
 
 - name: "[Ubuntu] Install i3 and related packages"
+  become: true
   apt:
     name:
-      - i3-gaps
-      - i3status
-      - i3lock
-      - i3blocks
-      - i3xrocks
-      - remontoire 
+    - i3-gaps
+    - i3status
+    - i3lock
+    - i3blocks
+    - i3xrocks
+    - remontoire 
     state: present
-  become: true
+  when: ansible_distribution == "Ubuntu"
   tags:
     - i3
 
