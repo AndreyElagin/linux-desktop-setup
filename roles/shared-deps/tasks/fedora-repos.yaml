@@ -1,4 +1,16 @@
-- name: Enable the RPM Fusion repository
+- name: (Fedora) Import RPM Fusion keys
+  rpm_key:
+    state: present
+    key: "{{ item }}"
+  with_items:
+    - https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora
+    - https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora
+  when:
+    - ansible_distribution == "Fedora"
+  tags:
+    - shared_deps
+
+- name: (Fedora) Enable the RPM Fusion repository
   become: true
   dnf:
     name:
