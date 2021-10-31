@@ -2,7 +2,9 @@
   become: true
   dnf:
     name:
-      - lpf
+      - flatpak
+      - dbus-daemon
+      - dbus-x11
     state: present
   when:
     - ansible_distribution == "Fedora"

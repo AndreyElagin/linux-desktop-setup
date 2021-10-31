@@ -9,26 +9,22 @@
     - gui
     - spotify
 
-- name: (Fedora) Approve Spotify LPF module
+- name: (Fedora) Add flatpak Spotify repo
   become: true
-  command: sh -c 'echo y | env PAGER=/bin/cat lpf approve spotify-client'
-  when: ansible_distribution == "Fedora"
+  flatpak_remote:
+    name: flathub
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+    method: system
+    state: present
   tags:
     - gui
     - spotify
 
-- name: (Fedora) Build Spotify LPF module
-  become: true
-  command: sh -c 'echo y | lpf build spotify-client'
-  when: ansible_distribution == "Fedora"
-  tags:
-    - gui
-    - spotify
-
-- name: (Fedora) Install the Spotify LPF module
-  become: true
-  command: sh -c 'echo y | lpf install spotify-client'
-  when: ansible_distribution == "Fedora"
+- name (Fedora) Install Spotify
+  community.general.flatpak:
+    name: com.spotify.Client
+    state: present
+    method: user
   tags:
     - gui
     - spotify
