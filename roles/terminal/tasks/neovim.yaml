@@ -1,28 +1,75 @@
-- name: download latest release of neovim 
-  get_url:
-    url: https://github.com/neovim/neovim/releases/latest/download/nvim.appimage 
-    dest: /usr/local/bin/vim
+- name: (Ubuntu) Download latest release of neovim
   become: true
+  get_url:
+    url: https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+    dest: /usr/local/bin/vim
+  when: ansible_distribution == "Ubuntu"
   tags:
     - terminal
     - neovim
 
-- name: make neovim file executable 
+- name: (Ubuntu) Make neovim file executable
   file:
     path: /usr/local/bin/vim
-    state: file 
+    state: file
     mode: a+x
   become: true
   tags:
     - terminal
     - neovim
 
-- name: install The Silver Searcher for full text search
+- name: (Ubuntu) Install The Silver Searcher for full text search
+  become: true
   apt:
     name: silversearcher-ag
     state: present
-  become: true
+  when: ansible_distribution == "Ubuntu"
   tags:
     - terminal
     - neovim
 
+- name: (Fedora) Install neovim + the_silver_searcher
+  become: true
+  dnf:
+    name: the_silver_searcher
+    state: present
+  when: ansible_distribution == "Fedora"
+  tags:
+    - terminal
+    - neovim
+
+- name: Check plug.vim is already downloaded
+  stat:
+    path: /home/{{ ansible_user_id }}/.local/share/nvim/site/autoload/plug.vim
+  register: plug_vim_installed
+  tags:
+    - terminal
+    - neovim
+
+- name: Create directory for plug.vim
+  file:
+    path: /home/{{ ansible_user_id }}/.local/share/nvim/site/autoload
+    state: directory
+  when: not plug_vim_installed.stat.exists
+  tags:
+    - terminal
+    - neovim
+
+- name: Fetch plug.vim code
+  uri:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    return_content: true
+  register: plug_vim_source_code
+  when: not plug_vim_installed.stat.exists
+  tags:
+    - terminal
+    - neovim
+
+- name: Create plug.vim file and put it's source code into it
+  copy:
+    dest: /home/{{ ansible_user_id }}/.local/share/nvim/site/autoload/plug.vim
+    mode: +x
+    content: "{{ plug_vim_source_code }}"
+  tags:
+    - terminal
+    - neovim
