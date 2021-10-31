@@ -10,7 +10,7 @@
 
 - name: (Fedora) Install everyday utils
   become: true
-  apt:
+  dnf:
     name: "{{ item }}"
     state: present
   with_items: "{{ terminal.shared_packages + terminal.fedora_packages }}"
