@@ -19,7 +19,7 @@
     - gui
     - spotify
 
-- name: (Ubuntu) Add apt-key for spotify
+- name: (Ubuntu) Add apt-key for Spotify
   become: true
   apt_key:
     url: https://download.spotify.com/debian/pubkey_0D811D58.gpg
@@ -29,7 +29,7 @@
     - gui
     - spotify
 
-- name: (Ubuntu) Add spotify repo list
+- name: (Ubuntu) Add Spotify repo list
   become: true
   apt_repository:
     filename: spotify.list
@@ -40,7 +40,7 @@
     - gui
     - spotify
 
-- name: (Ubuntu) Install spotify
+- name: (Ubuntu) Install Spotify
   become: true
   apt:
     name: spotify-client

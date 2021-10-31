@@ -1,4 +1,4 @@
-- name: Check telegram is already installed
+- name: Check Telegram is already installed
   stat:
     path: /home/{{ ansible_user_id }}/Apps/Telegram/Telegram
   register: telegram_installed
@@ -6,7 +6,7 @@
     - gui
     - telegram 
 
-- name: Download and unzip telegram 
+- name: Download and unzip Telegram 
   unarchive:
     src: https://telegram.org/dl/desktop/linux
     dest: /home/{{ ansible_user_id }}/Apps
@@ -16,19 +16,8 @@
     - gui
     - telegram 
 
-- name: Create desktop entry for telegram 
-  copy:
-    dest: /home/{{ ansible_user_id }}/.local/share/applications/Telegram.desktop
-    mode: +x
-    content: |
-      [Desktop Entry]
-      Encoding=UTF-8
-      Version=1.0
-      Type=Application
-      NoDisplay=true
-      Exec=/home/{{ ansible_user_id }}/Apps/Telegram/Telegram -workdir /home/daddyingrave/.local/share/TelegramDesktop/ -- %u
-      Name=Telegram Desktop
-      Comment=Custom definition for Telegram Desktop
+- name: Create desktop entry and binary for Telegram
+  shell: "(/home/{{ ansible_user_id }}/Apps/Telegram/Telegram >/dev/null 2>&1 &)"
   tags:
     - gui
-    - telgram
+    - toolbox

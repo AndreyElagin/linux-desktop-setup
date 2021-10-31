@@ -5,6 +5,8 @@
       - flatpak
       - dbus-daemon
       - dbus-x11
+      - openssl
+      - nss
     state: present
   when:
     - ansible_distribution == "Fedora"
