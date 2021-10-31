@@ -1,5 +1,18 @@
 - name: Install LightDM
   become: true
+  dnf:
+    name:
+      - lightdm
+      - lightdm-gtk-greeter
+    state: present
+  when: ansible_distribution == "Fedora"
+  tags:
+    - display
+    - display-manager
+    - lightdm
+
+- name: Install LightDM
+  become: true
   apt:
     name:
       - lightdm
