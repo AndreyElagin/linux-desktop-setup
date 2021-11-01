@@ -10,7 +10,16 @@
       - mesa-dri-drivers
       - glx-utils
       - libglvnd
+      - xrandr
     state: present
+  when:
+    - ansible_distribution == "Fedora"
+  tags:
+    - shared_deps
+
+- name: Install pexpect
+  pip:
+    name: pexpect
   when:
     - ansible_distribution == "Fedora"
   tags:
