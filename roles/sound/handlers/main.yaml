@@ -1,4 +1,5 @@
 - name: restart pulse as user
+  become: true 
   systemd:
     name: pulseaudio.service
     daemon_reload: yes
