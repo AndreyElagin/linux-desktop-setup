@@ -11,6 +11,8 @@
       - glx-utils
       - libglvnd
       - xrandr
+      - wmname
+      - setxkbmap
     state: present
   when:
     - ansible_distribution == "Fedora"
@@ -24,3 +26,4 @@
     - ansible_distribution == "Fedora"
   tags:
     - shared_deps
+

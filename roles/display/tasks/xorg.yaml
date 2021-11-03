@@ -15,6 +15,7 @@
       - xorg-x11-drv-wacom
       - xorg-x11-drv-wacom-serial-support
       - xorg-x11-fonts-misc
+      - xrdb
     state: present
   when: ansible_distribution == "Fedora"
   tags:
