@@ -1,4 +1,5 @@
-- name: install blueman
+- name: (Ubuntu) Install blueman
+  become: true
   apt:
     name:
       - bluez
@@ -6,11 +7,25 @@
     state: present
   notify:
     - restart pulse as user
-  become: true
+  when: ansible_distribution == "Ubuntu"
   tags:
     - bluetooth
 
-- name: auto-switch between HSP/HSF and A2DP
+- name: (Fedora) Install blueman
+  become: true
+  dnf:
+    name:
+      - bluez
+      - blueman
+    state: present
+  notify:
+    - restart pulse as user
+  when: ansible_distribution == "Fedora"
+  tags:
+    - bluetooth
+
+- name: Auto-switch between HSP/HSF and A2DP
+  become: true
   lineinfile:
     dest: /etc/pulse/default.pa
     regex: "^load-module module-bluetooth-policy"
@@ -18,54 +33,52 @@
     line: "load-module module-bluetooth-policy auto_switch=2"
   notify:
     - restart pulse as user
-  become: true
   tags:
     - bluetooth      
 
-- name: do not auto power on the bluetooth device
+- name: Do not auto power on the bluetooth device
   command: gsettings set org.blueman.plugins.powermanager auto-power-on false
   become: false 
-  become_user: "{{ user.name }}"
   tags:
     - bluetooth
 
-- name: unblock the bluetooth service
+- name: Unblock the bluetooth service
+  become: true
   service:
-    name: "rfkill-block@bluetooth.service"
+    name: "bluetooth.service"
     enabled: no
     state: stopped
-  when: bluetooth.disable == False
-  become: true
+  when: bluetooth.disable == false
   tags:
     - bluetooth
 
-- name: enable and start the bluetooth service
+- name: Enable and start the bluetooth service
+  become: true
   service:
     name: bluetooth.service
     enabled: yes
     state: started
-  when: bluetooth.disable == False
-  become: true
+  when: bluetooth.disable == false
   tags:
     - bluetooth
 
-- name: disable and stop the bluetooth service
+- name: Disable and stop the bluetooth service
+  become: true
   service:
     name: bluetooth.service
     enabled: no
     state: stopped
-  when: bluetooth.disable == True
-  become: true
+  when: bluetooth.disable == true
   tags:
     - bluetooth
 
-- name: block the bluetooth service
+- name: Block the bluetooth service
+  become: true
   service:
-    name: "rfkill-block@bluetooth.service"
+    name: "bluetooth.service"
     enabled: yes
     state: started
-  when: bluetooth.disable == True
-  become: true
+  when: bluetooth.disable == true
   tags:
     - bluetooth
 

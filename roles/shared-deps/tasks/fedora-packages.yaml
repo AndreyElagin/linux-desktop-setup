@@ -13,7 +13,6 @@
       - xrandr
       - wmname
       - setxkbmap
-      - mdp
       - gnome-font-viewer
     state: present
   when:
