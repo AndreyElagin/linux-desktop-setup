@@ -13,6 +13,8 @@
       - xrandr
       - wmname
       - setxkbmap
+      - mdp
+      - gnome-font-viewer
     state: present
   when:
     - ansible_distribution == "Fedora"

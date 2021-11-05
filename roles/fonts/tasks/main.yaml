@@ -1,0 +1,17 @@
+- name: Create directories for Nerd Fonts
+  file:
+    path: "{{ fonts.directory }}/{{ item | regex_replace('^([^/]+)/.*$', '\\1') }}"
+    state: directory
+  with_items: "{{ fonts.nerd_fonts }}"
+  tags:
+    - fonts
+
+- name: Download Nerd Fonts 
+  get_url:
+    url: "{{ fonts.nerd_fonts_github_repo }}/{{ item | regex_replace(' ', '%20') }}"
+    dest: "{{ fonts.directory }}/{{ item | regex_replace('^([^/]+)/.*$', '\\1') }}/{{ item | basename }}"
+  with_items: "{{ fonts.nerd_fonts }}"
+  notify: Reload fonts cache
+  tags:
+    - fonts 
+
