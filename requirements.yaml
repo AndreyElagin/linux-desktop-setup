@@ -1,5 +1,6 @@
 roles:
   - name: comcast.sdkman
+  - name: geerlingguy.docker
 
 collections:
   - name: community.general

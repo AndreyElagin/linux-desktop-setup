@@ -19,6 +19,7 @@
       - xss-lock
       - xmodmap
       - xset
+      - xdg-utils
     state: present
   when: ansible_distribution == "Fedora"
   tags:

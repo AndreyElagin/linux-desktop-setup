@@ -19,3 +19,10 @@
       sdkman_defaults:
         java: 11.0.12.fx-librca 
         sbt: 1.5.5
+      tags:
+        - sdkman
+    - role: geerlingguy.docker
+      become: true
+      tags:
+        - docker
+
