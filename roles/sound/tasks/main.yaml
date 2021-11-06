@@ -2,9 +2,11 @@
   become: true
   dnf:
     name: 
+      - pipewire-pulseaudio
       - alsa-utils
       - pasystray
       - pavucontrol
+      - pulseaudio-utils
     state: present
   notify: restart pulse as user
   when: ansible_distribution == "Fedora"

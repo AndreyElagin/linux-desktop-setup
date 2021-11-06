@@ -15,7 +15,8 @@
   become: true
   dnf:
     name:
-      - bluez
+      - pulseaudio-module-bluetooth-freeworld
+      - bluez-5
       - blueman
       - python3-cairo
       - python3-gobject
@@ -23,32 +24,25 @@
   when: ansible_distribution == "Fedora"
   tags:
     - bluetooth
-    # 
-- name: Auto-switch between HSP/HSF and A2DP
+
+- name: Check bluez-monitor conifiguration is already copied
+  stat:
+    path: /etc/pipewire/media-session.d/bluez-monitor.conf
+  register: bluez_monitor_config_copied
+  tags:
+    - bluetooth 
+
+- name: Copy bluez-monitor config
   become: true
-  lineinfile:
-    dest: /etc/pulse/default.pa
-    regex: "^load-module module-bluetooth-policy"
-    state: present
-    line: "load-module module-bluetooth-policy auto_switch=2"
+  copy:
+    src: bluez-monitor.conf
+    dest: /etc/pipewire/media-session.d/bluez-monitor.conf 
+    mode: u=rw,g=r,o=r
+  when: 
+    - ansible_distribution == "Fedora"
+    - bluez_monitor_config_copied.stat.exists
   tags:
     - bluetooth
-
-    # todo
-    #- name: Enable sink auto-switch 
-    #  become: true
-    #  blockinfile:
-    #    path: /etc/pulse/default.pa
-    #    backup: yes
-    #    marker: "<!-- ANSIBLE MANAGED BLOCK -->"
-    #    block: |
-    #      .ifexists module-bluetooth-discover.so
-    #      load-module module-switch-on-connect
-    #      .endif
-    #  notify:
-    #    - restart pulse as user
-    #  tags:
-    #    - bluetooth
 
 - name: Do not auto power on the bluetooth device
   command: gsettings set org.blueman.plugins.powermanager auto-power-on false
