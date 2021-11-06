@@ -17,9 +17,9 @@
     name:
       - bluez
       - blueman
+      - python3-cairo
+      - python3-gobject
     state: present
-  notify:
-    - restart pulse as user
   when: ansible_distribution == "Fedora"
   tags:
     - bluetooth
@@ -31,11 +31,9 @@
     regex: "^load-module module-bluetooth-policy"
     state: present
     line: "load-module module-bluetooth-policy auto_switch=2"
-  notify:
-    - restart pulse as user
   tags:
     - bluetooth
-    
+
     # todo
     #- name: Enable sink auto-switch 
     #  become: true
