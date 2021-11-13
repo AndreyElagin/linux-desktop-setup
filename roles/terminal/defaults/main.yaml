@@ -4,6 +4,7 @@ terminal:
     - curl
     - wget
     - htop
+    - bpytop
     - jq
     - zsh
     - ranger
