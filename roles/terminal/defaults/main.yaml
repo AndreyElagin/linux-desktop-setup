@@ -12,7 +12,11 @@ terminal:
     - fzf
     - tree
     - nodejs
+    - atool
   fedora_packages:
     - httpd-tools
+    - ImageMagick
+    - xclip 
+    - python-pillow
   ubuntu_packages:
     - apache2-utils

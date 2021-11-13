@@ -14,6 +14,18 @@
     state: present
   when: ansible_distribution == "Fedora"
   tags:
+    - gui
+
+- name: (Fedora) Install install gui packages 
+  become: true
+  dnf:
+    name: 
+      - qimgv
+      - vlc
+    state: present
+    install_weak_deps: false
+  when: ansible_distribution == "Fedora"
+  tags:
     - gui 
 
 - import_tasks: spotify.yaml

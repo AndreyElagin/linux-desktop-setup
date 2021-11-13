@@ -15,6 +15,7 @@
       - wmname
       - setxkbmap
       - gnome-font-viewer
+      - openvpn
     state: present
   when:
     - ansible_distribution == "Fedora"
