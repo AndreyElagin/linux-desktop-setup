@@ -1,17 +1,35 @@
 - name: Create directories for Nerd Fonts
   file:
-    path: "{{ fonts.directory }}/{{ item | regex_replace('^([^/]+)/.*$', '\\1') }}"
+    path: "{{ fonts.directory }}/{{ item }}"
     state: directory
-  with_items: "{{ fonts.nerd_fonts }}"
+  with_items: "{{ fonts.names }}"
   tags:
     - fonts
 
+# TODO idempotency!
 - name: Download Nerd Fonts 
   get_url:
-    url: "{{ fonts.nerd_fonts_github_repo }}/{{ item | regex_replace(' ', '%20') }}"
-    dest: "{{ fonts.directory }}/{{ item | regex_replace('^([^/]+)/.*$', '\\1') }}/{{ item | basename }}"
-  with_items: "{{ fonts.nerd_fonts }}"
-  notify: Reload fonts cache
+    url: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ fonts.release }}/{{ item }}.zip"
+    dest: "{{ fonts.directory }}" 
+    timeout: 360
+  with_items: "{{ fonts.names }}"
   tags:
     - fonts 
+
+- name: Download and unzip Nerd Fonts 
+  unarchive:
+    src: "{{ fonts.directory }}/{{ item }}.zip"
+    dest: "{{ fonts.directory }}/{{ item }}"
+    remote_src: yes
+  with_items: "{{ fonts.names }}"
+  tags:
+    - fonts 
+
+- name: Remove Nerd Fonts zips 
+  ansible.builtin.file:
+    path: "{{ fonts.directory }}/{{ item }}.zip"
+    state: absent
+  with_items: "{{ fonts.names }}"
+  tags:
+    - fonts
 

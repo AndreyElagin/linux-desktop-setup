@@ -1,23 +1,15 @@
 fonts:
-  directory: /home/{{ ansible_user_id }}/.local/share/fonts/NerdFonts 
-  nerd_fonts_github_repo: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts
-  nerd_fonts:
-    - "3270/Medium/complete/3270-Medium Nerd Font Complete.otf"
-    - "Iosevka/Heavy/complete/Iosevka Term Heavy Nerd Font Complete.ttf"
-    - "Iosevka/Light/complete/Iosevka Term Light Nerd Font Complete.ttf"
-    - "Iosevka/Medium-Italic/complete/Iosevka Medium Italic Nerd Font Complete.ttf"
-    - "Iosevka/Medium/complete/Iosevka Medium Nerd Font Complete.ttf"
-    - "Iosevka/Medium/complete/Iosevka Term Medium Nerd Font Complete.ttf"
-    - "Iosevka/Regular/complete/Iosevka Term Nerd Font Complete Mono.ttf"
-    - "Iosevka/Regular/complete/Iosevka Nerd Font Complete Mono.ttf"
-    - "Noto/Emoji/complete/Noto Emoji Nerd Font Complete Mono.ttf"
-    - "Noto/Emoji/complete/Noto Emoji Nerd Font Complete.ttf"
-    - "Noto/Mono/complete/Noto Mono Nerd Font Complete Mono.ttf"
-    - "Noto/Mono/complete/Noto Mono Nerd Font Complete.ttf"
-    - "FiraCode/Regular/complete/Fira Code Regular Nerd Font Complete Mono.ttf"
-    - "FiraCode/Regular/complete/Fira Code Regular Nerd Font Complete.ttf"
-    - "FiraCode/Bold/complete/Fira Code Bold Nerd Font Complete Mono.ttf"
-    - "FiraCode/Bold/complete/Fira Code Bold Nerd Font Complete.ttf"
-    - "FiraCode/Retina/complete/Fira Code Retina Nerd Font Complete Mono.ttf"
-    - "FiraCode/Retina/complete/Fira Code Retina Nerd Font Complete.ttf"
+  directory: /home/{{ ansible_user_id }}/.local/share/fonts/nerd-fonts 
+  release: v2.1.0
+  names:
+    - DejaVuSansMono
+    - DroidSansMono
+    - FiraCode
+    - Inconsolata
+    - JetBrainsMono
+    - LiberationMono
+    - Noto
+    - RobotoMono
+    - SourceCodePro
+    - UbuntuMono
 
