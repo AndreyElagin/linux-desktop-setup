@@ -6,23 +6,34 @@
   tags:
     - gui
 
-- name: Install gui packages 
+- name: Install themes 
   become: true
   dnf:
     name: 
-      - chromium-freeworld
+      - arc-theme
+      - papirus-icon-theme
     state: present
   when: ansible_distribution == "Fedora"
   tags:
     - gui
 
-- name: (Fedora) Install install gui packages 
+- name: Install gui packages 
+  become: true
+  dnf:
+    name: 
+      - chromium-freeworld
+      - vlc
+      - deadbeef
+    state: present
+  when: ansible_distribution == "Fedora"
+  tags:
+    - gui
+
+- name: (Fedora) Install qimgv without weak dependencies 
   become: true
   dnf:
     name: 
       - qimgv
-      - vlc
-      - deadbeef
     state: present
     install_weak_deps: false
   when: ansible_distribution == "Fedora"
