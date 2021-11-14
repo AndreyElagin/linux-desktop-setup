@@ -28,6 +28,7 @@
     - i3xrocks
     - remontoire 
     - nitrogen
+    - i3status-rust
     state: present
   when: ansible_distribution == "Ubuntu"
   tags:
@@ -41,6 +42,7 @@
       - i3lock
       - i3blocks
       - nitrogen
+      - i3status-rust
     state: present
   become: true
   when: ansible_distribution == "Fedora"

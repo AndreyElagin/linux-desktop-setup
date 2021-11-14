@@ -22,6 +22,7 @@
     name: 
       - qimgv
       - vlc
+      - deadbeef
     state: present
     install_weak_deps: false
   when: ansible_distribution == "Fedora"

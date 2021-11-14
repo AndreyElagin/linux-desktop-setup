@@ -14,8 +14,14 @@
       - xrandr
       - wmname
       - setxkbmap
+      - kbdd
       - gnome-font-viewer
       - openvpn
+      - dnf-plugin-system-upgrade
+      - NetworkManager-tui
+      - fontawesome-free-fonts
+      - material-icons-fonts
+      - emoji-picker
     state: present
   when:
     - ansible_distribution == "Fedora"

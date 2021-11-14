@@ -22,3 +22,20 @@
     - ansible_distribution == "Fedora"
   tags:
     - shared_deps
+
+- name: Enable copr repos 
+  become: true
+  community.general.copr:
+    host: "{{ item.host }}"
+    state: enabled
+    name: "{{ item.name }}" 
+  when:
+    - ansible_distribution == "Fedora"
+  with_items:
+    - host: copr.fedorainfracloud.org
+      name: atim/i3status-rust 
+    - host: copr.fedorainfracloud.org
+      name: vishalvvr/fontawesome-fonts
+  tags:
+    - shared_deps 
+
