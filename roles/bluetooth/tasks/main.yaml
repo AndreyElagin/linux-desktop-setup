@@ -15,8 +15,7 @@
   become: true
   dnf:
     name:
-      - pulseaudio-module-bluetooth-freeworld
-      - bluez-5
+      - bluez
       - blueman
       - python3-cairo
       - python3-gobject

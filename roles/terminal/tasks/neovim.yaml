@@ -72,7 +72,9 @@
   copy:
     dest: /home/{{ ansible_user_id }}/.local/share/nvim/site/autoload/plug.vim
     mode: +x
-    content: "{{ plug_vim_source_code.content }}"
+    content: |
+      "{{ plug_vim_source_code.content }}"
+  when: not plug_vim_installed.stat.exists
   tags:
     - terminal
     - neovim

@@ -24,9 +24,10 @@
     - kitty
 
 - name: Link kitty
+  become: true
   file:
     src: /home/{{ ansible_user_id }}/.local/kitty.app/bin/kitty
-    dest: /home/{{ ansible_user_id }}/.local/bin/kitty
+    dest: /usr/local/bin/kitty
     state: link
   when: not kitty_installed.stat.exists
   tags:
