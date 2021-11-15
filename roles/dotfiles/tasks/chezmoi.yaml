@@ -17,6 +17,7 @@
   copy:
     src: bin/chezmoi
     dest: /usr/local/bin/chezmoi
+    mode: u=rwx,g=rx,o=rx
   become: true
   when: not chezmoi_installed.stat.exists
   tags:

@@ -22,6 +22,9 @@
       - fontawesome-free-fonts
       - material-icons-fonts
       - emoji-picker
+      - python3-pip
+      - tar
+      - unzip
     state: present
   when:
     - ansible_distribution == "Fedora"

@@ -1,4 +1,4 @@
-- name: Create Apps directory 
+- name: Create Apps directory
   file:
     path: /home/{{ ansible_user_id }}/Apps
     state: directory
@@ -6,10 +6,10 @@
   tags:
     - gui
 
-- name: Install themes 
+- name: Install themes
   become: true
   dnf:
-    name: 
+    name:
       - arc-theme
       - papirus-icon-theme
     state: present
@@ -17,10 +17,11 @@
   tags:
     - gui
 
-- name: Install gui packages 
+- name: Install gui packages
   become: true
   dnf:
-    name: 
+    name:
+      - firefox
       - chromium-freeworld
       - vlc
       - deadbeef
@@ -29,20 +30,20 @@
   tags:
     - gui
 
-- name: (Fedora) Install qimgv without weak dependencies 
+- name: (Fedora) Install qimgv without weak dependencies
   become: true
   dnf:
-    name: 
+    name:
       - qimgv
     state: present
     install_weak_deps: false
   when: ansible_distribution == "Fedora"
   tags:
-    - gui 
+    - gui
 
 - import_tasks: spotify.yaml
-- import_tasks: postman.yaml 
-- import_tasks: toolbox.yaml 
-- import_tasks: telegram.yaml 
+- import_tasks: postman.yaml
+- import_tasks: toolbox.yaml
+- import_tasks: telegram.yaml
 - import_tasks: robo3t.yaml
 
