@@ -1,0 +1,10 @@
+- name: Copy dnf config 
+  become: true
+  copy:
+    src: dnf.conf
+    dest: /etc/dnf/dnf.conf
+    mode: u=rw,g=r,o=r 
+  tags:
+    - display 
+    - xinit 
+
