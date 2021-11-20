@@ -21,6 +21,8 @@
       - xset
       - xdg-utils
       - xprop
+      - xinput
+      - wmctrl
     state: present
   when: ansible_distribution == "Fedora"
   tags:
