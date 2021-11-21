@@ -1,24 +1,3 @@
-- name: (Fedora) Add flatpak Spotify repo
-  flatpak_remote:
-    name: flathub
-    state: present
-    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-    method: user
-  when: ansible_distribution == "Fedora"
-  tags:
-    - gui
-    - spotify
-
-- name: (Fedora) Install Spotify
-  flatpak:
-    name: com.spotify.Client
-    state: present
-    method: user
-  when: ansible_distribution == "Fedora"
-  tags:
-    - gui
-    - spotify
-
 - name: (Ubuntu) Add apt-key for Spotify
   become: true
   apt_key:

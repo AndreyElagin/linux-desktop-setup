@@ -23,6 +23,7 @@
     name:
       - firefox
       - chromium-freeworld
+      - google-chrome
       - vlc
       - deadbeef
     state: present
@@ -46,4 +47,5 @@
 - import_tasks: toolbox.yaml
 - import_tasks: telegram.yaml
 - import_tasks: robo3t.yaml
+- import_tasks: chromium-apps.yaml
 

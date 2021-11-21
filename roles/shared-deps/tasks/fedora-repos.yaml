@@ -39,3 +39,16 @@
   tags:
     - shared_deps 
 
+- name: Add google chorome repo 
+  become: true
+  yum_repository:
+    name: google-chrome
+    description: google repo
+    gpgcheck: yes
+    baseurl: https://dl.google.com/linux/chrome/rpm/stable/x86_64 
+    gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+  when:
+    - ansible_distribution == "Fedora"
+  tags:
+    - shared_deps 
+

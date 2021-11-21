@@ -1,0 +1,26 @@
+# TODO
+# 1. Put linkforward chrome extension to extensions directory
+# 2. Put linkforward "binary" to PATH
+# 3. Create desktop entry for linkforward
+# 4. Add linkforward MIME type association 
+# 5. Create chromium apps (desktop entries?)
+
+- name: Copy custom icons
+  copy:
+    src: "{{ item }}"
+    dest: "/home/{{ ansible_user_id }}/.local/share/icons/{{ item }}"
+  with_items: "{{ gui.icons }}"
+  tags:
+    - gui
+    - chromium-apps
+
+- name: Create destop entries for chromium apps
+  template:
+    src: generic.desktop.j2
+    dest: "/home/{{ ansible_user_id }}/.local/share/applications/{{ item.application_name }}.desktop"
+    mode: +x
+  with_items: "{{ gui.desktop_apps }}"
+  tags:
+    - gui
+    - chromium-apps
+

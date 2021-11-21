@@ -49,5 +49,4 @@
   tags:
     - i3
 
-- import_tasks: i3-autodisplay.yaml
 - import_tasks: ui.yaml

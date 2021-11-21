@@ -1,0 +1,22 @@
+gui:
+  icons:
+    - ringcentral.png
+    - outlook.png
+  desktop_apps:
+    - application_name: Spotify
+      exec: /usr/bin/google-chrome --app=https://open.spotify.com
+      icon: spotify-client
+      categories: Audio;Music;
+    - application_name: Notion 
+      exec: /usr/bin/google-chrome --app=https://www.notion.so
+      icon: notion 
+      categories: Office;ProjectManagement;
+    - application_name: Outlook 
+      exec: /usr/bin/google-chrome --app=https://outlook.office.com
+      icon: microsoft-office-online
+      categories: Office;Email;Calendar;
+    - application_name: RingCentralApp 
+      exec: /usr/bin/google-chrome --app=https://app.ringcentral.com
+      icon: ringcentral 
+      categories: Network;InstantMessaging;
+
