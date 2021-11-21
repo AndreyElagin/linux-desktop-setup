@@ -24,6 +24,14 @@
   tags:
     - bluetooth
 
+- name: Create directory for bluez monitor 
+  become: true
+  file:
+    path: /etc/pipewire/media-session.d
+    state: directory
+  tags:
+    - bluetooth 
+
 - name: Check bluez-monitor conifiguration is already copied
   stat:
     path: /etc/pipewire/media-session.d/bluez-monitor.conf
@@ -39,7 +47,7 @@
     mode: u=rw,g=r,o=r
   when: 
     - ansible_distribution == "Fedora"
-    - bluez_monitor_config_copied.stat.exists
+    - not bluez_monitor_config_copied.stat.exists
   tags:
     - bluetooth
 

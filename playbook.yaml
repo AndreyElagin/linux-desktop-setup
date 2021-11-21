@@ -14,8 +14,10 @@
       sdkman_auto_answer: true
       sdkman_update: true
       sdkman_install_packages:
-        - { candidate: java, version: 11.0.12.fx-librca }
-        - { candidate: sbt, version: 1.5.5 }
+        - candidate: java
+          version: 11.0.12.fx-librca
+        - candidate: sbt
+          version: 1.5.5
       sdkman_defaults:
         java: 11.0.12.fx-librca 
         sbt: 1.5.5
@@ -23,6 +25,8 @@
         - sdkman
     - role: geerlingguy.docker
       become: true
+      docker_users:
+        - "{{ ansible_user_id }}"
       tags:
         - docker
 
