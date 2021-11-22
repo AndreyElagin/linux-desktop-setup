@@ -25,6 +25,7 @@
       - python3-pip
       - tar
       - unzip
+      - sqlite
     state: present
   when:
     - ansible_distribution == "Fedora"

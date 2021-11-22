@@ -5,6 +5,14 @@
 # 4. Add linkforward MIME type association 
 # 5. Create chromium apps (desktop entries?)
 
+- name: Create directory for icons
+  file:
+    path: "/home/{{ ansible_user_id }}/.local/share/icons"
+    state: directory
+  tags:
+    - gui
+    - chromium-apps
+
 - name: Copy custom icons
   copy:
     src: "{{ item }}"

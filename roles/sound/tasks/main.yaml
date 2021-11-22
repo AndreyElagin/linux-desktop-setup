@@ -9,7 +9,6 @@
       - pulseaudio-utils
       - playerctl
     state: present
-  notify: restart pulse as user
   when: ansible_distribution == "Fedora"
   tags:
     - sound

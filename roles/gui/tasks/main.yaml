@@ -23,7 +23,7 @@
     name:
       - firefox
       - chromium-freeworld
-      - google-chrome
+      - google-chrome-stable
       - vlc
       - deadbeef
     state: present
