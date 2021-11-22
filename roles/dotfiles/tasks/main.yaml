@@ -1,11 +1,11 @@
-- name: check 1password CLI is already installed
+- name: Check 1password CLI is already installed
   stat:
     path: /usr/local/bin/op
   register: op_installed
   tags:
     - dotfiles
 
-- name: download and unzip 1password-cli
+- name: Download and unzip 1password-cli
   become: true
   unarchive:
     src: "https://cache.agilebits.com/dist/1P/op/pkg/{{ one_password_version }}/op_linux_amd64_{{ one_password_version }}.zip"
@@ -16,7 +16,7 @@
   tags:
     - dotfiles
 
-- name: login to 1password-cli
+- name: Login to 1password-cli
   expect:
     command: "op signin my.1password.com {{ one_password_email }} {{ one_password_code }}"
     responses:

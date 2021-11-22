@@ -1,4 +1,4 @@
-- name: check chezmoi is already installed
+- name: Check chezmoi is already installed
   stat:
     path: /usr/local/bin/chezmoi
   register: chezmoi_installed
@@ -6,14 +6,14 @@
     - dotfiles 
     - chezmoi
 
-- name: download chezmoi binary
+- name: Download chezmoi binary
   shell: sh -c "$(curl -fsLS git.io/chezmoi)"
   when: not chezmoi_installed.stat.exists
   tags:
     - dotfiles
     - chezmoi
 
-- name: move chezmoi to path
+- name: Move chezmoi to path
   copy:
     src: bin/chezmoi
     dest: /usr/local/bin/chezmoi
@@ -24,10 +24,19 @@
     - dotfiles
     - chezmoi
 
-- name: sync dotfiles from repo
+- name: Sync dotfiles from repo
   command: "chezmoi init --apply {{ github_username }}" 
   environment:
     OP_SESSION_my: "{{ op_login.stdout | regex_search('\"(.+)\"', '\\1') | first }}"
   tags:
     - dotfiles
     - chezmoi
+
+- name: Delete chezmoi binary
+  file:
+    path: bin/chezmoi
+    state: absent
+  tags:
+    - dotfiles
+    - chezmoi
+
