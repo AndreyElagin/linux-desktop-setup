@@ -24,33 +24,6 @@
   tags:
     - bluetooth
 
-- name: Create directory for bluez monitor 
-  become: true
-  file:
-    path: /etc/pipewire/media-session.d
-    state: directory
-  tags:
-    - bluetooth 
-
-- name: Check bluez-monitor conifiguration is already copied
-  stat:
-    path: /etc/pipewire/media-session.d/bluez-monitor.conf
-  register: bluez_monitor_config_copied
-  tags:
-    - bluetooth 
-
-- name: Copy bluez-monitor config
-  become: true
-  copy:
-    src: bluez-monitor.conf
-    dest: /etc/pipewire/media-session.d/bluez-monitor.conf 
-    mode: u=rw,g=r,o=r
-  when: 
-    - ansible_distribution == "Fedora"
-    - not bluez_monitor_config_copied.stat.exists
-  tags:
-    - bluetooth
-
 - name: Do not auto power on the bluetooth device
   command: gsettings set org.blueman.plugins.powermanager auto-power-on false
   become: false 
