@@ -4,6 +4,7 @@
   register: zsh_installed
   tags:
     - terminal
+    - oh_my_zsh
 
 - name: Clone oh-my-zsh
   git:
@@ -12,14 +13,7 @@
   when: not zsh_installed.stat.exists
   tags:
     - terminal
-
-- name: Create new ~/.zshrc
-  copy:
-    src: /home/{{ ansible_user_id }}/.oh-my-zsh/templates/zshrc.zsh-template
-    dest: /home/{{ ansible_user_id }}/.zshrc
-  when: not zsh_installed.stat.exists
-  tags:
-    - terminal
+    - oh_my_zsh
 
 - name: Set default shell for user
   become: true
@@ -28,6 +22,7 @@
     shell: /bin/zsh
   tags:
     - terminal
+    - oh_my_zsh
 
 # https://askubuntu.com/questions/910821/programs-installed-via-snap-not-showing-up-in-launcher
 - name: (Ubuntu) export all directories (for snap)
@@ -39,12 +34,32 @@
   when: ansible_distribution == "Ubuntu"
   tags:
     - terminal
+    - oh_my_zsh
 
-- name: Set theme for zsh
-  lineinfile:
-    path: /home/{{ ansible_user_id }}/.zshrc
-    regexp: "^ZSH_THEME*"
-    line: 'ZSH_THEME="avit"'
-  when: not zsh_installed.stat.exists
+- name: Install powerlevel10k theme 
+  git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: /home/{{ ansible_user_id }}/.oh-my-zsh/themes/powerlevel10k
+    depth: 1
   tags:
     - terminal
+    - oh_my_zsh
+
+- name: Install zsh-autosuggestion plugin 
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: /home/{{ ansible_user_id }}/.oh-my-zsh/plugins/zsh-autosuggestions
+    depth: 1
+  tags:
+    - terminal
+    - oh_my_zsh
+
+- name: Install zsh-syntax-highlighting plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git 
+    dest: /home/{{ ansible_user_id }}/.oh-my-zsh/plugins/zsh-syntax-highlighting
+    depth: 1
+  tags:
+    - terminal
+    - oh_my_zsh
+
