@@ -58,6 +58,7 @@
       Type=Application
       Exec=/home/{{ ansible_user_id }}/Apps/Robo3t/bin/robo3t %U 
       Name=Robo3t
+      Icon=robo3t
   tags:
     - gui
     - robo3t 
