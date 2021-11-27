@@ -1,0 +1,25 @@
+- name: Check brew is already installed
+  stat:
+    path: /home/linuxbrew/.linuxbrew/bin/brew 
+  register: brew_installed
+  tags:
+    - terminal
+    - brew
+
+- name: Fetch brew installer code
+  uri:
+    url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+    return_content: true
+  register: brew_source_code
+  when: not brew_installed.stat.exists
+  tags:
+    - terminal
+    - brew
+
+- name: Install brew 
+  shell: "{{ brew_source_code.content }}"
+  when: not brew_installed.stat.exists
+  tags:
+    - terminal
+    - brew
+
