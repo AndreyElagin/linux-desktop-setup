@@ -26,6 +26,8 @@
       - tar
       - unzip
       - sqlite
+      - ripgrep
+      - ffmpeg
     state: present
   when:
     - ansible_distribution == "Fedora"
