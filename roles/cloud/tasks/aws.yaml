@@ -1,0 +1,16 @@
+- name: Install aws tools from homebrew
+  community.general.homebrew:
+    name: 
+      - saml2aws 
+    state: present
+  tags:
+    - cloud
+    - aws 
+
+- name: Install awscli from pip
+  pip:
+    name: awscli 
+  tags:
+    - cloud
+    - aws
+

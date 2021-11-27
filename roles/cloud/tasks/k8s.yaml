@@ -1,0 +1,53 @@
+- name: Install k8s tools from homebrew
+  community.general.homebrew:
+    name: 
+      - kubectl
+      - helm
+      - helmfile
+      - k9s
+    state: present
+  tags:
+    - cloud
+    - k8s
+
+- name: Get installed helm plugins
+  shell: "helm plugin list | awk 'NR!=1 {print $1}'"
+  register: installed_helm_plugins
+  tags:
+    - cloud
+    - k8s
+
+- name: Install helm plugins
+  shell: helm plugin install {{ item.url }}
+  when: item.name not in installed_helm_plugins.stdout_lines
+  with_items: "{{ cloud.helm_plugins }}"
+  tags:
+    - cloud
+    - k8s
+
+- name: Install Lens 
+  become: true
+  dnf:
+    name: https://api.k8slens.dev/binaries/Lens-5.3.0-latest.20211125.2.x86_64.rpm
+    state: present
+    disable_gpg_check: true
+  tags:
+    - cloud
+    - k8s
+
+- name: Add custom icon and desktop entry for Lens
+  copy:
+    src: "{{ item.file }}" 
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - file: k8s-lens.desktop
+      dest: "/home/{{ ansible_user_id }}/.local/share/applications/k8s-lens.desktop"
+      mode: u=rwx,g=rx,o=rx
+    - file: k8s-lens.png
+      dest: "/home/{{ ansible_user_id }}/.local/share/icons/k8s-lens.png"
+      mode: u=rw,g=r,o=r
+  tags:
+    - cloud 
+    - k8s 
+

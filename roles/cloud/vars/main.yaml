@@ -1,0 +1,7 @@
+cloud:
+  helm_plugins:
+    - name: diff
+      url: https://github.com/databus23/helm-diff 
+    - name: cm-push 
+      url: https://github.com/chartmuseum/helm-push.git
+
