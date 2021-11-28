@@ -26,6 +26,7 @@
       - google-chrome-stable
       - vlc
       - deadbeef
+      - evince
     state: present
   when: ansible_distribution == "Fedora"
   tags:

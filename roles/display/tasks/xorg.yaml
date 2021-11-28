@@ -15,6 +15,7 @@
       - xorg-x11-drv-wacom
       - xorg-x11-drv-wacom-serial-support
       - xorg-x11-fonts-misc
+      - intel-media-driver
       - xrdb
       - xss-lock
       - xmodmap
