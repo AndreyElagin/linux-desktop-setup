@@ -34,7 +34,7 @@
 
 - name: Delete chezmoi binary
   file:
-    path: bin/chezmoi
+    path: bin
     state: absent
   tags:
     - dotfiles

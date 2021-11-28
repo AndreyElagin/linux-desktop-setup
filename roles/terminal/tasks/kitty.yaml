@@ -36,6 +36,7 @@
 
 - name: Copy kitty desktop to .local/share/applications
   copy:
+    mode: +x
     src: /home/{{ ansible_user_id }}/.local/kitty.app/share/applications/kitty.desktop
     dest: /home/{{ ansible_user_id }}/.local/share/applications/kitty.desktop
   when: not kitty_installed.stat.exists
@@ -53,3 +54,25 @@
   tags:
     - terminal
     - kitty
+      
+# see next
+- name: Remove rxvt-unicode (because of fuck you)
+  become: true
+  dnf:
+    name: rxvt-unicode
+    state: absent
+  tags:
+    - terminal
+    - kitty
+
+# see https://superuser.com/questions/1270462/how-to-make-firefox-open-cli-app-in-specified-terminal/1469035#1469035
+- name: https://www.amazon.com/s?k=crutch
+  become: true
+  file:
+    src: /home/{{ ansible_user_id }}/.local/kitty.app/bin/kitty
+    dest: /usr/local/bin/rxvt
+    state: link
+  tags:
+    - terminal
+    - kitty
+
