@@ -9,7 +9,6 @@
     - role: sound 
     - role: bluetooth 
     - role: fonts 
-    - role: cloud 
     - role: comcast.sdkman
       sdkman_user: "{{ ansible_user_id }}"
       sdkman_auto_answer: true

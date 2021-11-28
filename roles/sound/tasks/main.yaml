@@ -2,7 +2,7 @@
   become: true
   dnf:
     name: 
-      - pulseaudio
+      - pipewire-pulseaudio
       - alsa-utils
       - pasystray
       - pavucontrol
