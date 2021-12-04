@@ -30,6 +30,7 @@
       - zathura
       - zathura-plugins-all
       - copyq
+      - gnome-calendar 
     state: present
   when: ansible_distribution == "Fedora"
   tags:
