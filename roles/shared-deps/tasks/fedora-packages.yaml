@@ -18,7 +18,6 @@
       - gnome-font-viewer
       - openvpn
       - dnf-plugin-system-upgrade
-      - NetworkManager-tui
       - fontawesome-free-fonts
       - material-icons-fonts
       - emoji-picker
@@ -28,7 +27,7 @@
       - sqlite
       - ripgrep
       - ffmpeg
-    state: present
+   state: present
   when:
     - ansible_distribution == "Fedora"
   tags:

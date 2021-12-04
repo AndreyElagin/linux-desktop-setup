@@ -1,0 +1,11 @@
+- name: (Fedora) Install network packages
+  become: true
+  dnf:
+    name:
+      - NetworkManager-tui
+      - NetworkManager-wifi
+      - iwlax2xx-firmware
+      - bind-utils
+      - telnet
+  tags:
+    - network

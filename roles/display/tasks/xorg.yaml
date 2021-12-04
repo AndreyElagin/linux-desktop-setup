@@ -24,6 +24,7 @@
       - xprop
       - xinput
       - wmctrl
+      - autorandr
     state: present
   when: ansible_distribution == "Fedora"
   tags:
