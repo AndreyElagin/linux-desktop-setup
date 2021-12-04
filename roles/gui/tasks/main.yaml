@@ -29,6 +29,7 @@
       - file-roller
       - zathura
       - zathura-plugins-all
+      - copyq
     state: present
   when: ansible_distribution == "Fedora"
   tags:
