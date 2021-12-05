@@ -27,7 +27,7 @@
       - sqlite
       - ripgrep
       - ffmpeg
-   state: present
+    state: present
   when:
     - ansible_distribution == "Fedora"
   tags:
